@@ -1,0 +1,26 @@
+body {
+	margin: 0;
+	padding: 10px;
+}
+
+video {
+	display: block;
+	width: 480px;
+	height: 270px;
+}
+
+canvas {
+	display: block;
+	width: 640px;
+	height: 360px;
+	outline: 1px solid black;
+	margin: 10px 0;
+}
+canvas.missing {
+	outline: 1px solid red;
+}
+
+input[type="range"] {
+	display: block;
+	width: 480px;
+}
