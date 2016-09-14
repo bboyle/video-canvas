@@ -7,46 +7,88 @@
 </head>
 <body>
 
-	<video autoplay loop>
-		<source src="poles.mp4" type="video/webm">
-		<source src="poles.mp4" type="video/mp4">
-	</video>
+	<section class="compare">
+		<figure>
+			<video id="video1" preload="auto" autoplay loop>
+				<source src="poles.webm" type="video/webm">
+				<source src="poles.mp4" type="video/mp4">
+			</video>
+			<figcaption>WEBM/MP4 video (Miro converter - 468 KB / 676 KB - not optimised for seeking)</figcaption>
+		</figure>
 
-	Scrubber
-	<input name="scrub" type="range" min="0">
+		<figure>
+			<video id="video2" preload="auto" autoplay loop muted>
+				<source src="poles2.webm" type="video/webm">
+			</video>
+			<figcaption>WEBM video (encoded by <a href="http://syncsketch.com/">syncsketch</a> - 1.5 MB - optimised for seeking)</figcaption>
+		</figure>
+	</section>
 
-	Volume
-	<input name="volume" type="range" min="0" max="1" step="0.1" value="1" list="levels">
-	<datalist id="levels">
-		<option value="0"   value="Mute"></option>
-		<option value="0.1" value="10%"></option>
-		<option value="0.2" value="20%"></option>
-		<option value="0.3" value="30%"></option>
-		<option value="0.4" value="40%"></option>
-		<option value="0.5" value="50%"></option>
-		<option value="0.6" value="60%"></option>
-		<option value="0.7" value="70%"></option>
-		<option value="0.8" value="80%"></option>
-		<option value="0.9" value="90%"></option>
-		<option value="1"   value="100%"></option>
-	</datalist>
 
-	Play speed
-	<input name="rate" type="number" min="0.1" max="5" value="1" step="0.1" list="rates" required>
-	<datalist id="rates">
-		<option value="0.1"></option>
-		<option value="0.5"></option>
-		<option value="0.8"></option>
-		<option value="1"></option>
-		<option value="2"></option>
-		<option value="5"></option>
-	</datalist>
+	<ul id="controls">
+		<li>
+			<label for="scrub">Frame</label>
+			<input  id="scrub" type="range" min="0" list="frames">
+			<datalist id="frames">
+				<option value="0"></option>
+			</datalist>
+		</li>
 
-	Sync while playing?
-	<input name="sync-playback" type="checkbox" checked>
+		<li>
+			<button type="button" id="play">Play / pause</button>
 
-	<canvas id="cache"></canvas>
-	<canvas id="video"></canvas>
+			<label for="volume">Volume</label>
+			<input  id="volume" type="range" min="0" max="1" step="0.1" value="1" list="levels">
+			<datalist id="levels">
+				<option value="0"   value="0"></option>
+				<option value="0.1" value="10%"></option>
+				<option value="0.2" value="20%"></option>
+				<option value="0.3" value="30%"></option>
+				<option value="0.4" value="40%"></option>
+				<option value="0.5" value="50%"></option>
+				<option value="0.6" value="60%"></option>
+				<option value="0.7" value="70%"></option>
+				<option value="0.8" value="80%"></option>
+				<option value="0.9" value="90%"></option>
+				<option value="1"   value="100%"></option>
+			</datalist>
+
+			<label for="rate">Play speed</label>
+			<input  id="rate" type="number" min="0.1" max="5" value="1" step="0.1" list="rates" required>
+			<datalist id="rates">
+				<option value="0.1"></option>
+				<option value="0.5"></option>
+				<option value="0.8"></option>
+				<option value="1"></option>
+				<option value="2"></option>
+				<option value="5"></option>
+			</datalist>
+
+			<input  id="sync-playback" type="checkbox" checked>
+			<label for="sync-playback">Sync playback</label>
+
+			<label><input name="sync-video" type="radio" value="video" checked>First video</label>
+			<label><input name="sync-video" type="radio" value="video2">Second video</label>
+
+			<button type="button" id="clear-cache">Clear cache</button>
+
+			<input  id="ghosting" type="checkbox" checked>
+			<label for="ghosting">Ghosting</label>
+		</li>
+	</ul>
+
+	<section class="compare">
+		<figure>
+			<canvas id="video"></canvas>
+			<figcaption>Canvas, synced to video - seek performance depends on video</figcaption>
+		</figure>
+
+		<figure>
+			<canvas id="cache"></canvas>
+			<figcaption>Canvas, cached from video - seek ok after cache (play through 2-3 times), chews memory, enables multi-frame features (like ghosting)</figcaption>
+		</figure>
+	</section>
+
 
 	<script src="video-canvas.js"></script>
 

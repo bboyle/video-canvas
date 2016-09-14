@@ -1,6 +1,11 @@
 body {
 	margin: 0;
 	padding: 10px;
+	font-family: sans-serif;
+}
+
+section.compare {
+	display: flex;
 }
 
 video {
@@ -14,13 +19,21 @@ canvas {
 	width: 640px;
 	height: 360px;
 	outline: 1px solid black;
-	margin: 10px 0;
 }
 canvas.missing {
 	outline: 1px solid red;
 }
 
-input[type="range"] {
-	display: block;
-	width: 480px;
+input#scrub {
+	width: 100%;
+}
+
+ul#controls {
+	list-style: none;
+	margin: 50px;
+	padding: 0;
+}
+ul#controls li {
+	margin: 10px 0;
+	padding: 0;
 }
